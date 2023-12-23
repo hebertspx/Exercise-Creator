@@ -1,6 +1,7 @@
 
 
 module.exports = {
+    SECRET_KEY: process.env.SECRET_KEY,
     DB_USER: process.env.DB_USER,
     DB_HOST: process.env.DB_HOST,
     DB_DATABASE: process.env.DB_DATABASE,

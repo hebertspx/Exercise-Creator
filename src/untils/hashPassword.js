@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 
-function hashPassword(password, value){
+function hashPassword(password, value) {
     const newPass = bcrypt.hash(password, value)
     return newPass
 }

@@ -1,5 +1,9 @@
 const { connectionKnex } = require('../../config/dataBaseWithKnex');
 
+async function listAll() {
+    const rows = await connectionKnex('users').select('*')
+    return rows
+}
 
 async function findByEmail(email) {
     const rows = await connectionKnex('users').select('email').from('users').where('email', email)
@@ -11,7 +15,18 @@ async function create({ name, email, password }) {
     return { id: rows[0].id, name, email }
 }
 
+async function signIn({ email }) {
+    const rows = await connectionKnex('users').select().from('users').where({ email }).debug()
+
+    if (rows.length) {
+        return rows[0]
+    }
+    return null
+}
+
 module.exports = {
     create,
-    findByEmail
+    findByEmail,
+    signIn,
+    listAll
 }

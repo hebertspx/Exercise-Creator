@@ -1,10 +1,18 @@
 const express = require('express')
 const userRouter = express.Router();
 const userService = require('../users/users.service');
-const { userValidationRules } = require('./users.middleware');
+const { userValidationRules, authorizationUser } = require('./users.middleware');
 const { validatorController } = require('../../untils/validator.middleware');
 
-
+userRouter.get('/', authorizationUser, async function (req, res) {
+    try {
+        const responseService = await userService.listAll()
+        res.send({ data: responseService })
+    } catch (error) {
+        console.log("Error", error);
+        res.status(500).json({ error: "Request error" })
+    }
+})
 
 
 userRouter.post('/', userValidationRules(), validatorController, async function (req, res) {
@@ -14,6 +22,18 @@ userRouter.post('/', userValidationRules(), validatorController, async function 
     } catch (error) {
         console.log("Error", error);
         res.status(500).json({ error: "Error when trying to create user" });
+    }
+})
+
+userRouter.post('/signIn', async function (req, res) {
+    try {
+        const { email, password } = req.body
+        const responseService = await userService.signIn({ email, password })
+
+        res.send({ data: responseService })
+    } catch (error) {
+        console.log('Error', error)
+        res.status(401).json({ error: 'User or password invalid' })
     }
 })
 
