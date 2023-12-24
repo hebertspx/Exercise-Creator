@@ -17,7 +17,7 @@ async function create({ name, email, password }) {
 
 async function signIn({ email }) {
     const rows = await connectionKnex('users').select().from('users').where({ email }).debug()
-
+    console.log('rows', rows)
     if (rows.length) {
         return rows[0]
     }

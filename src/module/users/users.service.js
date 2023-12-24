@@ -1,6 +1,5 @@
 const { hashPassword } = require('../../untils/hashPassword')
 const usersRepository = require('../users/users.repository')
-const bcrypt = require('bcryptjs')
 const { jwtSignIn } = require('../../untils/jwt.service')
 const { comparePassword } = require('../../untils/comparePassword')
 

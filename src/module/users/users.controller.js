@@ -1,7 +1,7 @@
 const express = require('express')
 const userRouter = express.Router();
 const userService = require('../users/users.service');
-const { userValidationRules, authorizationUser } = require('./users.middleware');
+const { userValidationRules, authorizationUser, signInValidationRules } = require('./users.middleware');
 const { validatorController } = require('../../untils/validator.middleware');
 
 userRouter.get('/', authorizationUser, async function (req, res) {
@@ -25,10 +25,10 @@ userRouter.post('/', userValidationRules(), validatorController, async function 
     }
 })
 
-userRouter.post('/signIn', async function (req, res) {
+userRouter.post('/signIn', signInValidationRules(), validatorController, async function (req, res) { // validar o email e a senha antes de passar daqui
     try {
-        const { email, password } = req.body
-        const responseService = await userService.signIn({ email, password })
+
+        const responseService = await userService.signIn(req.body)
 
         res.send({ data: responseService })
     } catch (error) {

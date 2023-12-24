@@ -5,7 +5,7 @@ function authorizationUser(req, res, next) {
     try {
         const bearerToken = req.headers.authorization
         const [bearer, token] = bearerToken.split(" ")
-     
+
         if (bearer === "Bearer" && token) {
             const user = jwtVerify(token)
             req.user = user
@@ -53,8 +53,25 @@ function userValidationRules() {
     ]
 }
 
+function signInValidationRules() {
+    return [
+        check('email')
+            .notEmpty()
+            .withMessage('Email cannot be empty')
+            .isEmail()
+            .withMessage('Invalid Email'),
+        check('password')
+            .notEmpty()
+            .withMessage('Passoword cannot be empty')
+            .isLength(8)
+            .isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1, minSymbols: 1, minNumbers: 1 })
+            .withMessage('Password needs to be stronger')
+    ]
+}
+
 
 module.exports = {
     userValidationRules,
-    authorizationUser
+    authorizationUser,
+    signInValidationRules
 }
