@@ -2,6 +2,7 @@ require('dotenv').config()
 var express = require('express');
 var app = express();
 const { userRouter } = require('./module/users/users.controller');
+const { disciplineRouter } = require('./module/disciplines/disciplines.controller')
 const cors = require('cors')
 
 app.use(cors())
@@ -13,6 +14,7 @@ app.get('/', function (_req, res) {
 })
 
 app.use('/users', userRouter)
+app.use('/disciplines', disciplineRouter)
 
 app.listen(3000, function () {
     console.log('Serviço liberado na porta 3000!');

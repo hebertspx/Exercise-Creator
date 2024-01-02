@@ -25,7 +25,7 @@ userRouter.post('/', userValidationRules(), validatorController, async function 
     }
 })
 
-userRouter.post('/signIn', signInValidationRules(), validatorController, async function (req, res) { // validar o email e a senha antes de passar daqui
+userRouter.post('/signIn', signInValidationRules(), validatorController, async function (req, res) {
     try {
 
         const responseService = await userService.signIn(req.body)
@@ -38,5 +38,5 @@ userRouter.post('/signIn', signInValidationRules(), validatorController, async f
 })
 
 module.exports = {
-    userRouter
+    userRouter,
 }
