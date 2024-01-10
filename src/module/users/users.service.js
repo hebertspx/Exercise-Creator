@@ -8,11 +8,13 @@ async function listAll() {
     return users
 }
 
-async function findByEmail(email) {
-    const existentEmail = await usersRepository.findByEmail(email)
+async function findByEmail({ email }) {
+    const existentEmail = await usersRepository.findByEmail({ email })
+    console.log('service', email)
     if (existentEmail) {
         return existentEmail
     }
+    throw new Error('This email is not registered')
 
 }
 
