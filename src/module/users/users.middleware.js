@@ -18,6 +18,7 @@ function authorizationUser(req, res, next) {
     }
 }
 
+
 function userValidationRules() {
     return [
         check('name')

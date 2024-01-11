@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer')
-const { MAILSERVICE, MAILUSER, MAILPASS } = require('./env')
+const { MAILSERVICE, MAILUSER, MAILPASS } = require('./env.js')
 
-const communicator = nodemailer.createTransport({
+const mailConnection = nodemailer.createTransport({
     service: MAILSERVICE,
     port: 587,
     secure: true,
@@ -11,4 +11,6 @@ const communicator = nodemailer.createTransport({
     }
 })
 
-module.exports = communicator
+module.exports = {
+    mailConnection
+}

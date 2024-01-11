@@ -9,5 +9,7 @@ module.exports = {
     DB_PORT: process.env.DB_PORT,
     MAILSERVICE: process.env.MAILSERVICE,
     MAILUSER: process.env.MAILUSER,
-    MAILPASS: process.env.MAILPASS
+    MAILPASS: process.env.MAILPASS,
+    BASE_URL_FRONT: process.env.BASE_URL_FRONT,
+    RESETPASS_SECRET_KEY: process.env.RESETPASS_SECRET_KEY
 }

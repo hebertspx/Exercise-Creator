@@ -10,7 +10,14 @@ function jwtVerify(token) {
     return jwt.verify(token, SECRET_KEY)
 }
 
+function jwtResetPassword(user) {
+    return jwt.sign(user, env.RESETPASS_SECRET_KEY, { expiresIn: '5m' })
+}
+
+
+
 module.exports = {
     jwtSignIn,
-    jwtVerify
+    jwtVerify,
+    jwtResetPassword
 }
